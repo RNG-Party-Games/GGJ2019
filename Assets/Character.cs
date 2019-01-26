@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+	bool snapped = true, resting = false;
+	public Transform snapTransform, unSnapTransform;
 	CharacterController SelfController;
 	// Use this for initialization
 	void Start () {
@@ -16,9 +18,36 @@ public class Character : MonoBehaviour {
 		Vector3 rotateDirection = transform.rotation.eulerAngles;
 		moveDirection.x = Input.GetAxis("Horizontal") * .5f;
 		moveDirection.z = Input.GetAxis("Vertical") * .5f;
-		SelfController.Move(moveDirection);
-        float step = 5.0f * Time.deltaTime;
-		Vector3 newDir = Vector3.RotateTowards(transform.forward, moveDirection, step, 0.0f);
-        transform.rotation = Quaternion.LookRotation(newDir);
+		if(moveDirection == Vector3.zero) {
+			resting = true;
+		}
+		if(resting && snapped && moveDirection != Vector3.zero) {
+			UnSnap();
+		}
+		if(!snapped) {
+			SelfController.Move(moveDirection);
+			float step = 5.0f * Time.deltaTime;
+			Vector3 newDir = Vector3.RotateTowards(transform.forward, moveDirection, step, 0.0f);
+			transform.rotation = Quaternion.LookRotation(newDir);
+		}
+	}
+
+	public void Snap(Transform snapTransform, Transform unSnapTransform) {
+		if(!snapped) {
+			snapped = true;
+			this.snapTransform = snapTransform;
+			this.unSnapTransform = unSnapTransform;
+			transform.position = snapTransform.position;
+		}
+	}
+
+	public void UnSnap() {
+		snapped = false;
+		resting = false;
+		transform.position = unSnapTransform.position;
+	}
+
+	public bool IsSnapped() {
+		return snapped;
 	}
 }
