@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Character : MonoBehaviour {
 
@@ -16,6 +17,7 @@ public class Character : MonoBehaviour {
 	public HeatBar heatBar;
 	float originalY;
 	Vector3 originalPosition;
+	public TextMeshProUGUI pointsText;
 	// Use this for initialization
 
 	void Awake() {		
@@ -25,6 +27,7 @@ public class Character : MonoBehaviour {
 	void Start () {
 		SelfController = GetComponent<CharacterController>();
 		interactors = new List<Interactor>();
+		pointsText.text = "0 pts";
 	}
 	
 	// Update is called once per frame
@@ -112,6 +115,7 @@ public class Character : MonoBehaviour {
 	void Collect(Interactor i) {
 		i.Collect();
 		points += i.GetValue();
+		pointsText.text = points + " pts";
 		interactors.Remove(i);
 		closest = null;
 		FindClosestInteractor();
@@ -153,8 +157,20 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Reset() {
+		heat = 1.0f;
 		transform.position = originalPosition;
 		closest = null;
 		interactors = new List<Interactor>();
+		points = 0;		
+		pointsText.text = points + " pts";
+	}
+
+	public int GetPoints() {
+		return points;
+	}
+
+	public void Kill() {
+		heat = 0.0f;
+		UnSnap();
 	}
 }

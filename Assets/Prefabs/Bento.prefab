@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499046685}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: -0.93274504, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 32.354923, y: 50.6375, z: 17.30276}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,6 +108,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  active: 1
+  type: 0
+  textureSwap: {fileID: 0}
+  objectSwap: {fileID: 0}
+  animation: 
+  volume: {fileID: 0}
+  lightsOff: {r: 0, g: 0, b: 0, a: 0}
+  clip: {fileID: 8300000, guid: 84a000f898f913248a96c3f24423debb, type: 3}
+  audioSource: {fileID: 6533046340199414224, guid: 293cafde8303e9e4abc3151a50da71cf,
+    type: 3}
 --- !u!114 &6214397787288326627
 MonoBehaviour:
   m_ObjectHideFlags: 0

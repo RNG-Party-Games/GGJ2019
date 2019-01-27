@@ -14,12 +14,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool allEmpty = true;
-        foreach(Spawner s in spawners) {
-            if(!s.IsEmpty()) {
-                allEmpty = false;
-            }
-        }
+
     }
 
     public void StartSpawning() {
@@ -32,5 +27,16 @@ public class SpawnManager : MonoBehaviour
         foreach(Spawner s in spawners) {
             s.Reset();
         }
+    }
+
+    public bool IsEmpty() {        
+        bool allEmpty = true;
+        foreach(Spawner s in spawners) {
+            if(!s.IsEmpty()) {
+                allEmpty = false;
+            }
+        }
+
+        return allEmpty;
     }
 }
